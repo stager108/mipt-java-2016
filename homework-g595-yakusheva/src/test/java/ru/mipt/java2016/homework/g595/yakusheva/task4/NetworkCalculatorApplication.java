@@ -17,7 +17,9 @@ import org.springframework.context.annotation.Configuration;
  *     -H "Authorization: Basic $(echo -n "username:password" | base64)" \
  *     --data-raw "44*3+2"
  */
-@EnableAutoConfiguration
+
+@EnableAutoConfiguration(exclude = {
+        org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class})
 @Configuration
 @ComponentScan(basePackageClasses = NetworkCalculatorApplication.class)
 public class NetworkCalculatorApplication {
