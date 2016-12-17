@@ -7,6 +7,7 @@ import java.util.Stack;
 /**
  * Created by Софья on 04.10.2016.
  */
+
 public class MyFirstCalculator implements ru.mipt.java2016.homework.base.task1.Calculator {
 
     private class Element {
@@ -22,13 +23,13 @@ public class MyFirstCalculator implements ru.mipt.java2016.homework.base.task1.C
         }
     }
 
-    private String equation;
+    private StringBuilder equation = new StringBuilder();
     private int iterBegin = 0;
     private boolean prevMinus = false;
     private boolean prevOper = false;
     private boolean prevSkob = true;
-    private Stack<Element> eQ;
-    private Stack<Element> iQ;
+    private Stack<Element> eQ =  new Stack<Element>();
+    private Stack<Element> iQ =  new Stack<Element>();
 
     private double getResult(double a, double b, char operand) throws ParsingException {
         double result;
@@ -174,10 +175,7 @@ public class MyFirstCalculator implements ru.mipt.java2016.homework.base.task1.C
         return pr;
     }
 
-    MyFirstCalculator() {
-        eQ = new Stack<Element>();
-        iQ = new Stack<Element>();
-    }
+    MyFirstCalculator() { }
 
     private void pushNextElement() throws ParsingException {
         Element nextElement = getNextStackElement();
@@ -245,8 +243,14 @@ public class MyFirstCalculator implements ru.mipt.java2016.homework.base.task1.C
 
 
     public double calculate(String expression) throws ParsingException {
-        equation = expression;
+        equation.setLength(0);
+        equation.append(expression);
+        eQ.clear();
+        iQ.clear();
+        iterBegin = 0;
+        prevMinus = false;
         prevOper = true;
+        prevSkob = true;
         if (equation == null) {
             throw new ParsingException("null string");
         }
