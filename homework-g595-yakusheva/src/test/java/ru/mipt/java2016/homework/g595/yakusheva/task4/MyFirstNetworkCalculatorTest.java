@@ -12,7 +12,7 @@ import ru.mipt.java2016.homework.tests.task1.AbstractCalculatorTest;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = NetworkCalculatorApplication.class)
 public class MyFirstNetworkCalculatorTest extends AbstractCalculatorTest {
 
     @Autowired
