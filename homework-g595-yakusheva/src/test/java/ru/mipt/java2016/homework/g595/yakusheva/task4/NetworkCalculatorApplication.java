@@ -8,8 +8,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import ru.mipt.java2016.homework.base.task1.Calculator;
-import ru.mipt.java2016.homework.g000.lavrentyev.task1.CachedJEvalCalculator;
+//import ru.mipt.java2016.homework.g000.lavrentyev.task1.CachedJEvalCalculator;
 
 /**
  * curl http://localhost:9001/eval \
@@ -20,22 +19,27 @@ import ru.mipt.java2016.homework.g000.lavrentyev.task1.CachedJEvalCalculator;
  */
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan(basePackageClasses = FediqApplication.class)
-public class FediqApplication {
+@ComponentScan(basePackageClasses = NetworkCalculatorApplication.class)
+public class NetworkCalculatorApplication {
 
     @Bean
-    public Calculator calculator() {
-        return CachedJEvalCalculator.INSTANCE;
+    public MyFirstCalculator calculator() {
+        return new MyFirstCalculator();
+    }
+
+    @Bean
+    public MyCalculatorDao dao() {
+        return new MyCalculatorDao();
     }
 
     @Bean
     public EmbeddedServletContainerCustomizer customizer(
-            @Value("${ru.mipt.java2016.homework.g000.lavrentyev.task4.httpPort:9001}") int port) {
+            @Value("${ru.mipt.java2016.homework.g595.yakusheva.task4.httpPort:9001}") int port) {
         return container -> container.setPort(port);
     }
 
     public static void main(String[] args) {
-        SpringApplication application = new SpringApplication(FediqApplication.class);
+        SpringApplication application = new SpringApplication(NetworkCalculatorApplication.class);
         application.setBannerMode(Banner.Mode.OFF);
         application.run(args);
     }
